@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/login', [AuthController::class, 'login'])->middleware('alreadyLoggedIn');
-Route::get('/registration', [AuthController::class, 'registration'])->middleware('alreadyLoggedIn');
-Route::post('/register-user', [AuthController::class, 'registerUser'])->name('register-user');
-Route::post('/login-user', [AuthController::class, 'loginUser'])->name('login-user');
-Route::get('/logout', [AuthController::class, 'logout'])->middleware('isLoggedIn');
-
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('isLoggedIn');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login-user', [LoginController::class, 'loginUser'])->name('login-user');
+Route::get('/registration', [RegisterController::class, 'registration']);
+Route::post('/register-user', [RegisterController::class, 'registerUser'])->name('register-user');
+Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/dashboard', [AuthController::class, 'dashboard']);
 
